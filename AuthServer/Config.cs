@@ -10,7 +10,7 @@ public static class Argument {
 
 public class Config {
     public IConfiguration Conf { get; }
-    public string MongDbUri { get; }
+    public string MongoDbUri { get; }
     public string RedisUri { get; }
     public string MongoDbName { get; }
     public string AspEnv { get; }
@@ -19,13 +19,17 @@ public class Config {
 
     public Config(IConfiguration conf) {
         Conf = conf;
-        var aspEnv = conf.GetValue<string>(AspEnv);
+        var aspEnv = conf.GetValue<string>(Argument.AspEnv);
         if (string.IsNullOrWhiteSpace(aspEnv)) throw new InvalidOperationException($"There isn't {Argument.AspEnv}");
         AspEnv = aspEnv;
         var mongoDbUri = conf.GetValue<string>(Argument.MongoDbUri);
-        if (string.IsNullOrWhiteSpace(MongDbUri)) throw new InvalidOperationException($"There isn't {Argument.MongoDbUri}");
-        MongDbUri = mongoDbUri;
+        if (string.IsNullOrWhiteSpace(mongoDbUri)) throw new InvalidOperationException($"There isn't {Argument.MongoDbUri}");
+        MongoDbUri = mongoDbUri;
         MongoDbName = AspEnv + "_Db"; // MongoDB에 Database 생성시 기본 DB 이름
+        
+        var redisUri = conf.GetValue<string>(Argument.RedisUri);
+        if (string.IsNullOrWhiteSpace(redisUri)) throw new InvalidOperationException($"There isn't {Argument.RedisUri}");
+        RedisUri = redisUri;
     }
 
     public void BlockadeOn() => Blockade = true;

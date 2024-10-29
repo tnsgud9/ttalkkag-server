@@ -1,9 +1,5 @@
 syntax = "proto3";
 
-option csharp_namespace = "ApiServer";
-
-package greet;
-
 // The greeting service definition.
 service Greeter {
   // Sends a greeting

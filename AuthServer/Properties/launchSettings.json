@@ -7,7 +7,9 @@
       "launchBrowser": false,
       "applicationUrl": "http://localhost:5094",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "Redis_URI": "localhost:6379",
+        "MongoDB_URI": "mongodb://localhost?connect=replicaSet"
       }
     },
     "https": {
